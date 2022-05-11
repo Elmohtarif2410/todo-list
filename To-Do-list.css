@@ -1,0 +1,136 @@
+* {
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box
+}
+
+body {
+    font-family:Arial, Tahoma;
+    background:#f3f3f3;
+    display:flex;
+    justify-content:center
+}
+
+.contener {
+    width:800px;
+    margin-top:50px;
+    
+}
+
+.clear {clear: both;}
+
+/*    start Add taskes ==> header   */
+
+.contener header {
+    padding:15px;
+    background-color:#009688;
+    position:relative;
+}
+
+.contener header input {
+    padding:10px 15px;
+    width:98%;
+    border:none;
+    background:rgba(255, 255, 255, .25);
+    color:#fff;
+    font-size:20px
+}
+
+.contener header input:focus {outline:none}
+
+.contener header span {
+    position:absolute;
+    top:14px;
+    right:8px;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    background-color:#fff;
+    color:#009688;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    cursor:pointer
+}
+
+/*    start taskes item ==> Article   */
+
+.contener article {
+    background:#fff;
+    padding:15px
+}
+
+.contener article span.finshed-all,
+.contener article span.delete-all {
+    font-weight:bold;
+    padding:7px 10px;
+    border-radius:5px;
+    color:#fff;
+    text-transform:capitalize;
+    cursor:pointer;
+    margin-bottom:15px;
+    opacity:.6
+}
+
+.contener article span.finshed-all {background-color:#009688;float:left;margin-left:5px}
+.contener article span.delete-all {background-color:#E91E63;float:right;margin-right:5px}
+
+.contener article div.no-tasks,
+.contener article div.task{
+    padding:15px;
+    background:#eee;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.contener article div.no-tasks {color:#888;text-transform:capitalize;}
+
+.contener article div:last-child{margin:auto}
+
+.contener article div.task.finshed {text-decoration:line-through}
+
+.contener article div.task span.delete {
+    float:right;
+    font-size:14px;
+    font-weight:bold;
+    padding:7px 10px;
+    border-radius:5px;
+    background-color:#E91E63;
+    color:#fff;
+    text-transform:capitalize;
+    cursor:pointer
+}
+
+/*    start stats taskes ==> footer   */
+
+footer {
+    display:flex;
+    padding:20px 15px;
+    text-transform:capitalize;
+    font-weight:bold;
+    color:#444;
+    background:#fff;
+    margin-bottom:20px;
+    margin-top:5px
+}
+
+footer div.task-number {
+    width:50%
+}
+
+footer div.task-complet {
+    width:50%;
+    text-align:right
+}
+
+footer div.task-number span,
+footer div.task-complet span {
+    padding:2px 7px;
+    border-radius:5px;
+    font-size:14px;
+    color:#fff
+}
+
+footer div.task-number span {background:#E91E63}
+footer div.task-complet span {background:#03A9f4} 
