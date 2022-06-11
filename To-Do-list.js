@@ -11,6 +11,18 @@ var myInput = document.querySelector("header input"),
     finshedAllButton = document.querySelector("article .finshed-all"),
     deletedAllButton = document.querySelector("article .delete-all");
 
+if (localStorage.length !== 0) {
+    // add tasks to local Storage
+    for (let i = 0; i < localStorage.length; i++) {
+        addTask(localStorage.key(i))
+    }
+    // remove massege no tasks if not tasks histor storg
+    showNoTasksMassage();
+    // calck Number Tasks
+    calckTask();
+
+    console.log(true)
+}
     
 // Setp Functions Main
 // function focus in Input after load
@@ -20,13 +32,13 @@ function focusInput() {
 }
 
 // function create Add task
-function addTask() {
+function addTask(Text) {
     "use strict";
     // create Min Div Task          
     var taskDiv = document.createElement("div");
 
     // create Text to div task
-    var taskText = document.createTextNode(myInput.value);
+    var taskText = document.createTextNode(Text);
 
     // Add the text to div task
     taskDiv.appendChild(taskText);
@@ -88,7 +100,12 @@ function showNoTasksMassage() {
     var tasks = document.querySelectorAll("article .task");
 
     if (tasks.length === 0) {  // if don`t tasks => show the massage
+
         noTasksMassage.style.display = "block";
+        
+    } else {
+
+        noTasksMassage.style.display = "none";
     }
 }
 
@@ -108,13 +125,34 @@ mySpanButton.onclick = function () {
         window.alert("اكتب المهمة ياعم");
 
     } else {
+        tasks = document.querySelectorAll("article .task");
 
         // Remove Div No Tasks Massege
-        noTasksMassage.style.display = "none";  // => remove()
+        showNoTasksMassage();  // => remove()
 
         // Add Tasks [div(task) =. span(delete)] and add text and class list
-        addTask();
+        // if is tasks
+        if (tasks[0] !== undefined) {
+            for (let i = 0; i < tasks.length; i++) {
+                // if new task = old task
+                if (myInput.value === tasks[i].childNodes[0].textContent) {
+                    // massege
+                    window.alert("المهمة مكررة");
+                    // tested
+                    console.log("looped")
+                    break;     
 
+                }
+                // tested
+                addTask(myInput.value);
+                console.log("add")
+                
+            }
+            
+        } else { // if not tasks
+
+            addTask(myInput.value);
+        }
         // empaty value in input when onclick
         myInput.value = "";
 
@@ -123,6 +161,11 @@ mySpanButton.onclick = function () {
 
         // calck Number Tasks 
         calckTask();
+
+        // loclal storge 
+        tasks = document.querySelectorAll("article .task");
+        // add tasks to local Storge
+        localStorage.setItem(tasks[tasks.length - 1].childNodes[0].textContent, tasks[tasks.length - 1].childNodes[0].textContent);
     }
 };
 
@@ -140,8 +183,10 @@ document.addEventListener("click", function (e) {
 
     // deleted task ==> when click button delet
     if (e.target.className === "delete") {
-        // Add class finshed to tasks
+        // remove task
         e.target.parentElement.remove();
+        // remove task to local storge
+        localStorage.removeItem(e.target.parentElement.childNodes[0].textContent)
     }
     
     // Finshed All Tasks    
@@ -154,7 +199,10 @@ document.addEventListener("click", function (e) {
      // deleted All Tasks    
      if (e.target === deletedAllButton) {
         for (var t = 0; t < tasks.length; t++) {
+            // remove all tasks
             tasks[t].remove();
+            // remove all tasks to local storge
+            localStorage.clear()
         }
     }
 
