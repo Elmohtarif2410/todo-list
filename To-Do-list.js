@@ -131,28 +131,31 @@ mySpanButton.onclick = function () {
         showNoTasksMassage();  // => remove()
 
         // Add Tasks [div(task) =. span(delete)] and add text and class list
-        // if is tasks
+
+        // if is tasks looped | must the new task not equle old tasks
         if (tasks[0] !== undefined) {
+            // set status is a tasked looped
+            let status = true;
             for (let i = 0; i < tasks.length; i++) {
                 // if new task = old task
                 if (myInput.value === tasks[i].childNodes[0].textContent) {
                     // massege
                     window.alert("المهمة مكررة");
-                    // tested
-                    console.log("looped")
-                    break;     
-
+                    // trasform status => false
+                    status = false;
                 }
-                // tested
+            }  
+            // if status no equle false |  new task not equle old tasks                    
+            if (status === true) {
+                // add this task
                 addTask(myInput.value);
-                console.log("add")
-                
-            }
-            
-        } else { // if not tasks
-
+            } 
+        // if not tasks    
+        } else {
+            // add task becose not taskes been
             addTask(myInput.value);
         }
+
         // empaty value in input when onclick
         myInput.value = "";
 
